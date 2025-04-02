@@ -12,7 +12,16 @@ function pergunta(texto) {
     })
 }
 
+function perguntaText(texto) {
+    return new Promise((resolve) => {
+        rl.question(texto, (resposta) => {
+            resolve(resposta)
+        })
+    })
+}
+
 module.exports = {
     pergunta,
+    perguntaText,
     rl
 }
