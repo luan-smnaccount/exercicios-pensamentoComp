@@ -1,19 +1,30 @@
-const { perguntaText, rl } = require('./readline')
+const {pergunta, rl} = require('./readline')
 
-const idade = async() => {
-    const dataNascimento = await perguntaText('Informe sua data de nascimento no formato padrão (dd/MM/aa): ')
+function calculadoraIdade(dia, mes, anoNascimento, anoAtual) {
+    const dataAniversarioAtual = new Date(anoAtual, mes - 1, dia)
+    const dataNascimento = new Date(anoNascimento, mes - 1, dia)
 
-    const dataDividida = dataNascimento.split('/')
-    if(dataDividida.length < 3) {
-        console.log('Você não digitou no padrão esperado. Por favor tente novamente!');
-        rl.close()
-        return
+    let idade = anoAtual - dataNascimento.getFullYear()
+
+    let agora = new Date()
+    if(dataAniversarioAtual > agora) {
+        idade--
     }
 
-    const idadeUser = 2025-dataDividida[2]
-    console.log(`Usuário tem ${idadeUser} anos`);
+    return idade
+}
+
+const descobrirIdade = async() => {
+    const dia = await pergunta('Digite o dia do seu nascimento: ')
+    const mes = await pergunta('Digite o mes do seu nascimento: ')
+    const anoNascimento = await pergunta('Digite o dia do seu nascimento: ')
+    const anoAtual = await pergunta('Digite o ano atual: ')
+
+    let idade = calculadoraIdade(dia, mes, anoNascimento, anoAtual)
+
+    console.log(`Você tem ${idade} anos`);
     rl.close()
     
 }
 
-idade()
+descobrirIdade()
