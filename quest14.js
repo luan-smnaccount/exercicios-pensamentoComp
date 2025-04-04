@@ -19,7 +19,7 @@ const vogaisFrase = async() => {
         }
     }
 
-    const totalVogais = Object.values(vogais).reduce((acc, value) => acc + value, 1)
+    const totalVogais = Object.values(vogais).reduce((acc, value) => acc + value, 0)
     console.log('Total de vogais presentes na frase: ', totalVogais);
     rl.close()
     
